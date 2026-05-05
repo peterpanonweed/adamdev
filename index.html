@@ -135,22 +135,13 @@
     }
 
     .hero h1 .strike {
-      position: relative;
       color: var(--text-faint);
       display: inline-block;
-    }
-
-    .hero h1 .strike::after {
-      content: '';
-      position: absolute;
-      left: -2px;
-      right: -2px;
-      top: 48%;
-      height: 4px;
-      background: var(--coral);
-      display: block;
-      transform: rotate(-1.5deg);
-      border-radius: 2px;
+      text-decoration: line-through;
+      text-decoration-color: var(--coral);
+      text-decoration-thickness: 4px;
+      -webkit-text-decoration-line: line-through;
+      -webkit-text-decoration-color: var(--coral);
     }
 
     .hero-sub {
