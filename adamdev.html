@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>adamdev — I don't write code. I architect ideas.</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --purple: #534AB7;
+      --purple-light: #EEEDFE;
+      --purple-dark: #3C3489;
+      --purple-mid: #AFA9EC;
+      --teal: #1D9E75;
+      --teal-light: #E1F5EE;
+      --coral: #D85A30;
+      --coral-light: #FAECE7;
+      --text: #1a1a1a;
+      --text-muted: #666;
+      --text-faint: #999;
+      --bg: #fafaf8;
+      --bg-card: #ffffff;
+      --border: rgba(0,0,0,0.08);
+      --border-strong: rgba(0,0,0,0.15);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 16px;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(250,250,248,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 0.5px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 18px;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: -0.02em;
+    }
+
+    .nav-logo span { color: var(--purple); }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 14px;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--text); }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 8rem 2rem 4rem;
+      max-width: 900px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 500;
+      padding: 5px 14px;
+      border-radius: 20px;
+      background: var(--purple-light);
+      color: var(--purple-dark);
+      margin-bottom: 2rem;
+      letter-spacing: 0.05em;
+      width: fit-content;
+      animation: fadeUp 0.6s ease both;
+    }
+
+    .hero-badge::before {
+      content: '';
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--purple);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.8); }
+    }
+
+    .hero h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(42px, 7vw, 76px);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      color: var(--text);
+      margin-bottom: 1.5rem;
+      animation: fadeUp 0.6s 0.1s ease both;
+    }
+
+    .hero h1 em {
+      font-style: normal;
+      color: var(--purple);
+    }
+
+    .hero h1 .strike {
+      position: relative;
+      color: var(--text-faint);
+    }
+
+    .hero h1 .strike::after {
+      content: '';
+      position: absolute;
+      left: 0; right: 0;
+      top: 50%;
+      height: 3px;
+      background: var(--coral);
+      transform: rotate(-2deg);
+    }
+
+    .hero-sub {
+      font-size: 18px;
+      color: var(--text-muted);
+      max-width: 540px;
+      margin-bottom: 2.5rem;
+      font-weight: 300;
+      animation: fadeUp 0.6s 0.2s ease both;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      animation: fadeUp 0.6s 0.3s ease both;
+    }
+
+    .btn-primary {
+      background: var(--purple);
+      color: #fff;
+      border: none;
+      padding: 12px 28px;
+      border-radius: 8px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      font-weight: 500;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: background 0.2s, transform 0.15s;
+    }
+
+    .btn-primary:hover {
+      background: var(--purple-dark);
+      transform: translateY(-1px);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border-strong);
+      padding: 12px 28px;
+      border-radius: 8px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: background 0.2s, transform 0.15s;
+    }
+
+    .btn-outline:hover {
+      background: rgba(0,0,0,0.04);
+      transform: translateY(-1px);
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 2rem;
+      left: 2rem;
+      font-size: 12px;
+      color: var(--text-faint);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      animation: fadeUp 0.6s 0.6s ease both;
+    }
+
+    .hero-scroll::before {
+      content: '';
+      width: 1px;
+      height: 40px;
+      background: var(--border-strong);
+      display: block;
+    }
+
+    /* SECTIONS */
+    section {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 5rem 2rem;
+      border-top: 0.5px solid var(--border);
+    }
+
+    .eyebrow {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--purple);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
+
+    .section-title {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(28px, 4vw, 40px);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+      margin-bottom: 1.25rem;
+      color: var(--text);
+    }
+
+    .section-body {
+      font-size: 16px;
+      color: var(--text-muted);
+      max-width: 580px;
+      margin-bottom: 2rem;
+    }
+
+    /* MANIFESTO */
+    .manifesto-block {
+      background: var(--purple-light);
+      border-radius: 16px;
+      padding: 2.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .manifesto-block p {
+      font-size: 16px;
+      color: #3C3489;
+      line-height: 1.8;
+    }
+
+    .manifesto-block strong {
+      color: var(--purple-dark);
+      font-weight: 500;
+    }
+
+    .quote-pull {
+      border-left: 3px solid var(--purple);
+      padding: 0.5rem 0 0.5rem 1.5rem;
+      margin: 2rem 0;
+    }
+
+    .quote-pull p {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(18px, 2.5vw, 22px);
+      font-weight: 500;
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    .quote-pull cite {
+      font-size: 13px;
+      color: var(--text-faint);
+      font-style: normal;
+      display: block;
+      margin-top: 0.5rem;
+    }
+
+    /* PROJECTS */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+      margin-top: 2rem;
+    }
+
+    .project-card {
+      background: var(--bg-card);
+      border: 0.5px solid var(--border);
+      border-radius: 16px;
+      padding: 1.5rem;
+      text-decoration: none;
+      display: block;
+      transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+
+    .project-card:nth-child(1)::before { background: var(--teal); }
+    .project-card:nth-child(2)::before { background: var(--coral); }
+    .project-card:nth-child(3)::before { background: var(--purple); }
+
+    .project-card:hover {
+      border-color: var(--border-strong);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+    }
+
+    .project-card:hover::before { opacity: 1; }
+
+    .project-icon {
+      width: 44px; height: 44px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      margin-bottom: 1rem;
+    }
+
+    .project-card:nth-child(1) .project-icon { background: var(--teal-light); }
+    .project-card:nth-child(2) .project-icon { background: var(--coral-light); }
+    .project-card:nth-child(3) .project-icon { background: var(--purple-light); }
+
+    .project-card h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+
+    .project-card p {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    .project-tag {
+      display: inline-block;
+      font-size: 11px;
+      padding: 3px 10px;
+      border-radius: 20px;
+      margin-top: 12px;
+      font-weight: 500;
+    }
+
+    .project-card:nth-child(1) .project-tag { background: var(--teal-light); color: #0F6E56; }
+    .project-card:nth-child(2) .project-tag { background: var(--coral-light); color: #993C1D; }
+    .project-card:nth-child(3) .project-tag { background: var(--purple-light); color: var(--purple-dark); }
+
+    .project-arrow {
+      position: absolute;
+      top: 1.5rem; right: 1.5rem;
+      font-size: 18px;
+      color: var(--text-faint);
+      transition: transform 0.2s, color 0.2s;
+    }
+
+    .project-card:hover .project-arrow {
+      transform: translate(2px, -2px);
+      color: var(--text-muted);
+    }
+
+    /* OFFER */
+    .offer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-top: 2rem;
+    }
+
+    .offer-card {
+      border: 0.5px solid var(--border);
+      border-radius: 16px;
+      padding: 1.5rem;
+      background: var(--bg-card);
+      transition: border-color 0.2s;
+    }
+
+    .offer-card:hover { border-color: var(--purple-mid); }
+
+    .offer-num {
+      font-family: 'Syne', sans-serif;
+      font-size: 32px;
+      font-weight: 800;
+      color: var(--purple-light);
+      line-height: 1;
+      margin-bottom: 0.75rem;
+    }
+
+    .offer-card h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+
+    .offer-card p {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* ZEITGEIST STATEMENT */
+    .zeitgeist {
+      background: var(--text);
+      border-radius: 20px;
+      padding: 3.5rem;
+      text-align: center;
+    }
+
+    .zeitgeist .eyebrow { color: var(--purple-mid); }
+
+    .zeitgeist h2 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(26px, 4vw, 40px);
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+      letter-spacing: -0.02em;
+    }
+
+    .zeitgeist p {
+      font-size: 16px;
+      color: rgba(255,255,255,0.6);
+      max-width: 480px;
+      margin: 0 auto 2rem;
+    }
+
+    /* FOOTER */
+    footer {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2rem;
+      border-top: 0.5px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-logo {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 16px;
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .footer-logo span { color: var(--purple); }
+
+    footer p {
+      font-size: 13px;
+      color: var(--text-faint);
+    }
+
+    footer a {
+      color: var(--purple);
+      text-decoration: none;
+    }
+
+    footer a:hover { text-decoration: underline; }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .fade-in {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 600px) {
+      nav { padding: 1rem; }
+      .nav-links { display: none; }
+      .hero { padding: 6rem 1.25rem 3rem; }
+      section { padding: 3rem 1.25rem; }
+      .zeitgeist { padding: 2.5rem 1.5rem; }
+      footer { padding: 1.5rem 1.25rem; flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-logo">adam<span>dev</span></a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#projects">Work</a></li>
+      <li><a href="#offer">Offer</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-badge">Vibecoder · AI System Architect · Zeitgeist</div>
+    <h1>
+      I don't <span class="strike">write code</span>.<br>
+      I <em>architect ideas.</em>
+    </h1>
+    <p class="hero-sub">No CS degree. No Stack Overflow anxiety. Just sharp thinking, Claude, and a bias for getting things shipped.</p>
+    <div class="hero-cta">
+      <a href="#contact" class="btn-primary">Let's build something →</a>
+      <a href="#projects" class="btn-outline">See the work</a>
+    </div>
+    <div class="hero-scroll">scroll</div>
+  </div>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="fade-in">
+      <div class="eyebrow">The shift</div>
+      <h2 class="section-title">The bottleneck moved.<br>I moved with it.</h2>
+    </div>
+    <div class="fade-in">
+      <div class="manifesto-block">
+        <p>Software development used to reward the fastest typist. Not anymore. <strong>The craft has migrated upstream</strong> — from writing code to architecting systems, from syntax to specifications, from execution to supervision.</p>
+      </div>
+    </div>
+    <div class="fade-in">
+      <div class="quote-pull">
+        <p>"The question isn't can they write clean code. The question is: can they write a specification clean enough that an AI can't misinterpret it?"</p>
+        <cite>— Axel Molist Cordina, CEO WeUC</cite>
+      </div>
+    </div>
+    <div class="fade-in">
+      <p class="section-body">That's exactly what I do. I identify what needs to be built, break it into agent-sized thinking, and ship working products — fast. <strong>Vibe coding isn't a shortcut. It's the new architecture.</strong></p>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="fade-in">
+      <div class="eyebrow">Work</div>
+      <h2 class="section-title">Things I've built.</h2>
+      <p class="section-body">Real projects. Real problems. Real people — from a vet clinic in Spain to ping pong players across Germany.</p>
+    </div>
+    <div class="projects-grid fade-in">
+      <a class="project-card" href="https://github.com/peterpanonweed/ttturniersuche" target="_blank">
+        <span class="project-arrow">↗</span>
+        <div class="project-icon">🏓</div>
+        <h3>TT Turniersuche</h3>
+        <p>Tournament finder for table tennis players — aggregates all 18 German state associations in one searchable place.</p>
+        <span class="project-tag">Sports · Web App</span>
+      </a>
+      <a class="project-card" href="https://github.com/peterpanonweed/Annamalitos" target="_blank">
+        <span class="project-arrow">↗</span>
+        <div class="project-icon">🐾</div>
+        <h3>Annamalitos</h3>
+        <p>Digital intake system for a vet clinic — patient data, medical history, zero paperwork friction.</p>
+        <span class="project-tag">Healthcare · UX</span>
+      </a>
+      <a class="project-card" href="https://github.com/peterpanonweed/adamnuemm" target="_blank">
+        <span class="project-arrow">↗</span>
+        <div class="project-icon">🎙️</div>
+        <h3>Adam Nuemm</h3>
+        <p>Portfolio site for a professional voice actor — demos, presence, and instant credibility in one clean page.</p>
+        <span class="project-tag">Creative · Portfolio</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- OFFER -->
+  <section id="offer">
+    <div class="fade-in">
+      <div class="eyebrow">What I offer</div>
+      <h2 class="section-title">How we can work together.</h2>
+    </div>
+    <div class="offer-grid fade-in">
+      <div class="offer-card">
+        <div class="offer-num">01</div>
+        <h3>Build your idea</h3>
+        <p>You have a problem. I turn it into a working web product. Fast, focused, no unnecessary overhead.</p>
+      </div>
+      <div class="offer-card">
+        <div class="offer-num">02</div>
+        <h3>Learn to vibe code</h3>
+        <p>In 2 hours I show you exactly how I work with AI. You'll understand what's now possible — and how to do it yourself.</p>
+      </div>
+      <div class="offer-card">
+        <div class="offer-num">03</div>
+        <h3>System architect on demand</h3>
+        <p>Need someone to think through your product architecture, spec it out, and make it AI-ready? That's me.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ZEITGEIST CTA -->
+  <section id="contact" style="border-top: none; padding-top: 0;">
+    <div class="zeitgeist fade-in">
+      <div class="eyebrow">Zeitgeist</div>
+      <h2>Most people don't know<br>what just became possible.</h2>
+      <p>You do now. Let's build something together before everyone else catches up.</p>
+      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+        <a href="mailto:mail@adamnuemm.de" class="btn-primary">mail@adamnuemm.de →</a>
+        <a href="https://github.com/peterpanonweed" target="_blank" style="background:rgba(255,255,255,0.12);color:#fff;border:1px solid rgba(255,255,255,0.2);padding:12px 28px;border-radius:8px;font-family:'DM Sans',sans-serif;font-size:15px;text-decoration:none;display:inline-block;">GitHub ↗</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <a href="#" class="footer-logo">adam<span>dev</span></a>
+    <p>Built with Claude · <a href="https://github.com/peterpanonweed" target="_blank">github.com/peterpanonweed</a></p>
+    <p>© 2026 adamdev</p>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
