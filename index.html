@@ -135,13 +135,22 @@
     }
 
     .hero h1 .strike {
+      position: relative;
       color: var(--text-faint);
       display: inline-block;
-      text-decoration: line-through;
-      text-decoration-color: var(--coral);
-      text-decoration-thickness: 4px;
-      -webkit-text-decoration-line: line-through;
-      -webkit-text-decoration-color: var(--coral);
+    }
+
+    .hero h1 .strike::after {
+      content: '';
+      position: absolute;
+      left: -2px;
+      right: -2px;
+      top: 48%;
+      height: 4px;
+      background: var(--coral);
+      display: block;
+      transform: rotate(-1.5deg);
+      border-radius: 2px;
     }
 
     .hero-sub {
@@ -578,21 +587,21 @@
       <p class="section-body">Real projects. Real problems. Real people — from a vet clinic in Spain to ping pong players across Germany.</p>
     </div>
     <div class="projects-grid fade-in">
-      <a class="project-card" href="https://github.com/peterpanonweed/ttturniersuche" target="_blank">
+      <a class="project-card" href="https://ttturniersuche.de/" target="_blank">
         <span class="project-arrow">↗</span>
         <div class="project-icon">🏓</div>
         <h3>TT Turniersuche</h3>
         <p>Tournament finder for table tennis players — aggregates all 18 German state associations in one searchable place.</p>
         <span class="project-tag">Sports · Web App</span>
       </a>
-      <a class="project-card" href="https://github.com/peterpanonweed/Annamalitos" target="_blank">
+      <a class="project-card" href="https://peterpanonweed.github.io/Annamalitos/" target="_blank">
         <span class="project-arrow">↗</span>
         <div class="project-icon">🐾</div>
         <h3>Annamalitos</h3>
         <p>Digital intake system for a vet clinic — patient data, medical history, zero paperwork friction.</p>
         <span class="project-tag">Healthcare · UX</span>
       </a>
-      <a class="project-card" href="https://github.com/peterpanonweed/adamnuemm" target="_blank">
+      <a class="project-card" href="https://www.adamnuemm.de" target="_blank">
         <span class="project-arrow">↗</span>
         <div class="project-icon">🎙️</div>
         <h3>Adam Nuemm</h3>
