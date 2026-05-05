@@ -137,16 +137,20 @@
     .hero h1 .strike {
       position: relative;
       color: var(--text-faint);
+      display: inline-block;
     }
 
     .hero h1 .strike::after {
       content: '';
       position: absolute;
-      left: 0; right: 0;
-      top: 50%;
-      height: 3px;
+      left: -2px;
+      right: -2px;
+      top: 48%;
+      height: 4px;
       background: var(--coral);
-      transform: rotate(-2deg);
+      display: block;
+      transform: rotate(-1.5deg);
+      border-radius: 2px;
     }
 
     .hero-sub {
