@@ -89,7 +89,8 @@
     .hero h1 em { font-style: normal; color: var(--purple); display: inline-block; }
     .hero h1 .strike {
       color: var(--text-faint);
-      display: inline;
+      display: inline-block;
+      white-space: nowrap;
       text-decoration: line-through;
       text-decoration-color: var(--coral);
       text-decoration-thickness: 4px;
@@ -98,7 +99,6 @@
     }
     .hero h1 .line {
       display: block;
-      white-space: nowrap;
     }
     .hero-sub {
       font-size: 18px; color: var(--text-muted);
@@ -347,13 +347,13 @@
       nav { padding: 1rem; }
       .nav-links { display: none; }
       .hero { padding: 6rem 1.25rem 3rem; }
-      .hero h1 { font-size: 38px; }
+      .hero h1 { font-size: 36px; }
       section { padding: 3rem 1.25rem; }
       .zeitgeist { padding: 2.5rem 1.5rem; }
       footer { padding: 1.5rem 1.25rem; flex-direction: column; align-items: flex-start; }
     }
     @media (max-width: 400px) {
-      .hero h1 { font-size: 32px; }
+      .hero h1 { font-size: 30px; }
     }
   </style>
 </head>
