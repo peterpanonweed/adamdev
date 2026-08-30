@@ -300,6 +300,39 @@ font-size: 16px; font-weight: 700;
 color: var(--text); margin-bottom: 8px;
 }
 .offer-card p { font-size: 14px; color: var(--text-muted); line-height: 1.6; }
+.banderole {
+margin-top: 16px;
+background: var(--purple);
+border-radius: 16px;
+padding: 1.5rem 1.75rem;
+display: flex; align-items: center; justify-content: space-between;
+gap: 1.5rem; flex-wrap: wrap;
+}
+.banderole-text { flex: 1 1 340px; }
+.banderole-badge {
+display: inline-block;
+font-size: 11px; font-weight: 500;
+letter-spacing: 0.1em; text-transform: uppercase;
+background: rgba(255,255,255,0.18); color: #fff;
+padding: 4px 12px; border-radius: 20px; margin-bottom: 12px;
+}
+.banderole h3 {
+font-family: 'Syne', sans-serif;
+font-size: 20px; font-weight: 700; color: #fff;
+letter-spacing: -0.01em; margin-bottom: 8px;
+}
+.banderole p {
+font-size: 14px; color: rgba(255,255,255,0.75);
+line-height: 1.6; max-width: 54ch;
+}
+.banderole-cta {
+background: #fff; color: var(--purple-dark);
+padding: 12px 24px; border-radius: 8px;
+font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 500;
+text-decoration: none; white-space: nowrap;
+transition: background 0.2s, transform 0.15s;
+}
+.banderole-cta:hover { background: var(--purple-light); transform: translateY(-1px); }
 .zeitgeist {
 background: var(--text);
 border-radius: 20px;
@@ -354,6 +387,8 @@ nav { padding: 1rem; }
 .hero h1 { font-size: 36px; }
 section { padding: 3rem 1.25rem; }
 .zeitgeist { padding: 2.5rem 1.5rem; }
+.banderole { padding: 1.5rem 1.25rem; }
+.banderole-cta { width: 100%; text-align: center; }
 footer { padding: 1.5rem 1.25rem; flex-direction: column; align-items: flex-start; }
 }
 @media (max-width: 400px) { .hero h1 { font-size: 30px; } }
@@ -531,19 +566,27 @@ html { scroll-behavior: auto; }
 <div class="offer-grid fade-in">
 <div class="offer-card">
 <div class="offer-num">01</div>
-<h3>Build your idea</h3>
-<p>You have a problem. I turn it into a working web product. Fast, focused, no unnecessary overhead.</p>
+<h3>From idea to live product</h3>
+<p>You describe the problem. I come back with something that works, is online, and can take money. Spec to launch, no unnecessary overhead.</p>
 </div>
 <div class="offer-card">
 <div class="offer-num">02</div>
-<h3>Learn to vibe code</h3>
-<p>In 2 hours I show you exactly how I work with AI. You'll understand what's now possible — and how to do it yourself.</p>
+<h3>The tool that doesn't exist yet</h3>
+<p>You know your field and you do something by hand every day. I turn that workflow into software — the way Takewrite did it for dubbing scripts.</p>
 </div>
 <div class="offer-card">
 <div class="offer-num">03</div>
 <h3>System architect on demand</h3>
-<p>Need someone to think through your product architecture, spec it out, and make it AI-ready? That's me.</p>
+<p>Someone to think your product through, spec it out and make it AI-ready — with or without me building it afterwards.</p>
 </div>
+</div>
+<div class="banderole fade-in">
+<div class="banderole-text">
+<span class="banderole-badge">New</span>
+<h3>Vibe coding courses</h3>
+<p>Want to work this way yourself? I teach it — one to one or with your team, online or on site, in English or German. Tell me where you want to get to, and ask me what it costs.</p>
+</div>
+<a href="mailto:mail@adamnuemm.de?subject=Vibe%20coding%20course" class="banderole-cta">Ask what it costs →</a>
 </div>
 </section>
 
