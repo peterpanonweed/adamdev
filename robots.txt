@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://peterpanonweed.github.io/adamdev/sitemap.xml
