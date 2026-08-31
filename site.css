@@ -432,3 +432,22 @@ color: var(--text-muted); margin-bottom: 1.25rem;
 .artikel-lead { font-size: 18px; }
 .artikel p { font-size: 16px; }
 }
+
+/* ---------- Umbruch-Absicherung: nie Querscrollen auf dem Telefon ----------
+   Die Ueberschrift haelt "I architect" bewusst zusammen. In Sprachen mit
+   laengeren Woertern (indonesisch "Saya merancang") passt das auf einem
+   360er-Display nicht mehr und schob die Seite 43px nach rechts.
+   Auf schmalen Schirmen darf sie deshalb umbrechen.                        */
+.hero h1 { overflow-wrap: break-word; }
+@media (max-width: 700px) {
+.hero h1 .nobreak { white-space: normal; }
+}
+
+/* Lange Komposita (deutsch: "Verbraucherschlichtungsstelle") duerfen
+   umbrechen statt den Absatz breiter zu machen als den Bildschirm. */
+p, li, h1, h2, h3, .section-title, .artikel-titel, .work-body h3, .offer-card h3 {
+overflow-wrap: break-word;
+}
+.artikel p, .section-body, .manifesto-block p, .work-body p, .offer-card p, .banderole p {
+hyphens: auto;
+}
